@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\TaskApiController;
+use App\Http\Controllers\Api\MessageController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,11 +15,12 @@ use App\Http\Controllers\Api\TaskApiController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware(['throttle:api'])->group(function () {
+    Route::get('/test', function () {
+        return response()->json(['message' => 'Todo bien']);
+    });
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
+    Route::apiResource('users', UserApiController::class);
+    Route::apiResource('tareas', TaskApiController::class);
 });
 
-Route::apiResource('users', UserApiController::class);
-
-Route::apiResource('tareas', TaskApiController::class);
