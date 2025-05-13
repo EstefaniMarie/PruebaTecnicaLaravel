@@ -31,6 +31,16 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </fieldset>
                         </div>
+                        <small id="passwordHelp" class="form-text text-danger">
+                            La contraseña debe contener:
+                            <ul class="mb-0">
+                                <li id="min" class="text-danger">Mínimo 8 caracteres</li>
+                                <li id="upper" class="text-danger">Al menos una mayúscula</li>
+                                <li id="lower" class="text-danger">Al menos una minúscula</li>
+                                <li id="number" class="text-danger">Al menos un número</li>
+                                <li id="symbol" class="text-danger">Al menos un símbolo ( $, _, -, *)</li>
+                            </ul>
+                        </small>
                         <div class="row mt-2">
                             <div class="col-6 text-center">
                                 <button type="reset" class="btn-gradient-secondary btn-sm white"

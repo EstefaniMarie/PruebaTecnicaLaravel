@@ -114,6 +114,16 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </fieldset>
             </div>
+            <small id="passwordHelp" class="form-text text-danger">
+                La contraseña debe contener:
+                <ul class="mb-0">
+                    <li id="min" class="text-danger">Mínimo 8 caracteres</li>
+                    <li id="upper" class="text-danger">Al menos una mayúscula</li>
+                    <li id="lower" class="text-danger">Al menos una minúscula</li>
+                    <li id="number" class="text-danger">Al menos un número</li>
+                    <li id="symbol" class="text-danger">Al menos un símbolo ( $, _, -, *)</li>
+                </ul>
+            </small>
         </div>
     </x-modal>
     <x-slot name="header">
@@ -181,3 +191,24 @@
                 </div>
             </div>
 </x-app-layout>
+
+<script>
+    document.getElementById('password').addEventListener('input', function () {
+        const value = this.value;
+
+        document.getElementById('min').classList.toggle('text-success', value.length >= 8);
+        document.getElementById('min').classList.toggle('text-danger', value.length < 8);
+
+        document.getElementById('upper').classList.toggle('text-success', /[A-Z]/.test(value));
+        document.getElementById('upper').classList.toggle('text-danger', !/[A-Z]/.test(value));
+
+        document.getElementById('lower').classList.toggle('text-success', /[a-z]/.test(value));
+        document.getElementById('lower').classList.toggle('text-danger', !/[a-z]/.test(value));
+
+        document.getElementById('number').classList.toggle('text-success', /[0-9]/.test(value));
+        document.getElementById('number').classList.toggle('text-danger', !/[0-9]/.test(value));
+
+        document.getElementById('symbol').classList.toggle('text-success', /[!@#$%^&*(),.?":{}|<>]/.test(value));
+        document.getElementById('symbol').classList.toggle('text-danger', !/[!@#$%^&*(),.?":{}|<>]/.test(value));
+    });
+</script>

@@ -50,4 +50,5 @@ Route::get('tareas/{tareas}/editar', [TasksController::class, 'edit'])->name('ta
 Route::put('tareas/{tareas}', [TasksController::class, 'update'])->name('tareas.actualizar');
 Route::delete('/tarea/eliminar/{tarea}', [TasksController::class, 'destroy'])->name('tareas.eliminar');
 Route::get('/tareasxUsuario', [TasksxUserController::class, 'mostrarTareas'])->name('taskxUser');
+Route::post('/taskxUser', [TasksxUserController::class, 'store'])->name('crearTaskxUser');
 

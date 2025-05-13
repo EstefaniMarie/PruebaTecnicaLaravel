@@ -107,7 +107,7 @@
             });
         </script>
     </x-slot>
-    <x-modal name="addTareaModal" route="{{ route('crearTask') }}" title="Registrar Tarea">
+    <x-modal name="addTareaModal" route="{{ route('crearTaskxUser') }}" title="Registrar Tarea">
         <div class="row">
             <div class="col-12">
                 <fieldset class="name form-group">
