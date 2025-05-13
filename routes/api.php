@@ -4,7 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\TaskApiController;
-use App\Http\Controllers\Api\MessageController;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\TaskResource;
+use App\Models\User;
+use App\Models\Task;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +28,13 @@ Route::middleware(['throttle:api'])->group(function () {
     Route::apiResource('tareas', TaskApiController::class);
 });
 
+Route::get('/test-users', function () {
+    $users = User::all();
+    return UserResource::collection($users);
+});
+
+
+Route::get('/test-tasks', function () {
+    $tareas = Task::all();
+    return TaskResource::collection($tareas);
+});

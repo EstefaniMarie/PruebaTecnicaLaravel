@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 
 
@@ -33,7 +34,11 @@ class UserController extends Controller
             return redirect()->back()->withErrors(['error']);
         }
     }
-
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return new UserResource($user);
+    }
 
     public function edit($id)
     {
