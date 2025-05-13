@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Usuarios",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        },
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/tareas": {
+            "get": {
+                "summary": "Mostrar tareas",
+                "operationId": "2b292cc0638508a528f9d7dd4d71df36",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos las tareas."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "summary": "Mostrar usuarios",
+                "operationId": "862e982d8596a916e4f030cbce92bc53",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
