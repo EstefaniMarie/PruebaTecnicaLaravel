@@ -19,3 +19,19 @@ Instrucciones para la instalacion del sistema
     Aqui limitamos el numero de solicitudes por minuto, que en este caso son dos horas. De igual forma se puede comprobar con Postman
 
 
+
+Los usuarios por defecto son
+[
+                'name' => 'admin',
+                'correo' => 'admin@example.com',
+                'password' => 12345678,
+                'roles_id' => 1
+            ],
+            [
+                'name' => 'usuario',
+                'correo' => 'user@example.com',
+                'password' => 12345678,
+                'roles_id' => 2
+            ]
+
+
