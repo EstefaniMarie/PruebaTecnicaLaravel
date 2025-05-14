@@ -1,4 +1,4 @@
-Instrucciones para la instalacion del sistema
+![image](https://github.com/user-attachments/assets/2bf3f5c3-30f7-4e1e-8663-f417471b38e8)Instrucciones para la instalacion del sistema
 
 1.	Si esta instalado, debemos escribir composer update.
 2.	Instalar composer para poder crear un proyecto Laravel.
@@ -36,6 +36,31 @@ Los usuarios por defecto son
 
             ES MUY IMPORTANTE CORRER
 php artisan migrate --seed y luego php artisan serve
+
+
+IMAGENES QUE COMPRUEBAN QUE LAS API FUNCIONAN
+
+![image](https://github.com/user-attachments/assets/79acc03c-1544-4f8e-98e5-8042588893fc)
+
+![image](https://github.com/user-attachments/assets/49174f99-06f4-4742-8efb-f96822686134)
+
+![image](https://github.com/user-attachments/assets/d971e971-8be3-4ffe-b990-d17125058af6)
+
+![image](https://github.com/user-attachments/assets/18b61b56-15e4-4977-b5ea-cc9c3b2f631b)
+
+![image](https://github.com/user-attachments/assets/21bbde76-4f96-4357-acc6-cff9198b1838)
+
+![image](https://github.com/user-attachments/assets/58112f2f-5d5c-4892-a168-f7c8b8da9a40)
+
+![image](https://github.com/user-attachments/assets/4b1fc207-c053-4187-bc75-22a57e4b294b)
+
+
+
+
+
+
+
+
 
 
 
@@ -165,7 +190,6 @@ public function test_task_validation_fails_with_invalid_data()
 
     $controller->createTask($invalidData, $user);
 }
-
 
 
 
