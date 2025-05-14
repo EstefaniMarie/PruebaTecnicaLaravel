@@ -38,3 +38,142 @@ Los usuarios por defecto son
 php artisan migrate --seed y luego php artisan serve
 
 
+
+
+
+RESPUESTAS PREGUNTAS TECNICAS
+
+1. Patrón Observer
+
+2. 
+
+a.	
+
+MODELO USER.PHP
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class User extends Model
+{
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+}
+
+MODELO TASK.PHP
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Task extends Model
+{
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+
+b. $user = User::find($userId);
+$highPriorityTasks = $user->tasks()->where('priority', 'alta')->get();
+
+c.	use Illuminate\Support\Facades\DB;
+
+$topUser = User::withCount([
+ 'tasks as completed_tasks_count' => function ($query) {
+$query->where('completed', true);
+ }
+])->orderByDesc('completed_tasks_count')->first();
+
+
+3. 
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+use App\Models\Task;
+
+class CheckTaskEditPermission
+{
+    public function handle(Request $request, Closure $next): Response
+    {
+        $start = microtime(true); 
+
+        // a) Verificar permiso de edición
+        $taskId = $request->route('task'); 
+        $task = Task::find($taskId);
+
+        if (!$task) {
+            return response()->json(['error' => 'Tarea no encontrada'], 404);
+        }
+
+        $user = $request->user();
+
+        // Ejemplo: sólo el propietario puede editar
+        if ($task->user_id !== $user->id) {
+            return response()->json(['error' => 'No tienes permiso para editar esta tarea'], 403);
+        }
+
+        // Continuar con la petición
+        $response = $next($request);
+
+        // b) Calcular y registrar tiempo de ejecución
+        $end = microtime(true);
+        $duration = $end - $start;
+
+        Log::info("Tiempo de ejecución para {$request->method()} {$request->path()}: {$duration} segundos");
+
+        return $response;
+    }
+}
+
+4.
+
+a.	
+
+public function test_user_cannot_edit_others_tasks()
+{
+    $owner = new User(1, 'Propietario');
+    $otherUser = new User(2, 'Intruso');
+
+    $task = new Task(100, 'Tarea original', $owner->getId(), 'pendiente');
+
+    $controller = new TaskController();
+
+    $this->expectException(PermissionDeniedException::class);
+
+    $controller->editTask($task, [
+        'title' => 'Tarea modificada'
+    ], $otherUser);
+}
+
+b.	
+
+public function test_task_validation_fails_with_invalid_data()
+{
+    $user = new User(1, 'Validador');
+    $controller = new TaskController();
+
+    $invalidData = [
+        'title' => '', // vacío
+        'priority' => 'urgente' // no válido
+    ];
+
+    $this->expectException(ValidationException::class);
+
+    $controller->createTask($invalidData, $user);
+}
+
+
+
+
+
+
+
+
+
+
+
+
