@@ -34,4 +34,7 @@ Los usuarios por defecto son
                 'roles_id' => 2
             ]
 
+            ES MUY IMPORTANTE CORRER
+php artisan migrate --seed y luego php artisan serve
+
 
